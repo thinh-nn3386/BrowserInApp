@@ -1,0 +1,15 @@
+{
+    "eslint.packageManager": "yarn",
+    "prettier.configPath": ".prettierrc.json",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "eslint.alwaysShowStatus": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnPaste": false, // required
+    "editor.formatOnType": false, // required
+    "editor.formatOnSaveMode": "file",
+    "java.compile.nullAnalysis.mode": "automatic", // required to format on save
+  }
+  
