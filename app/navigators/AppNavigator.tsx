@@ -33,8 +33,10 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName="home"
+        initialRouteName="browser"
       >
+        <Stack.Screen name="browser" component={Screen.BrowserScreen} />
+
         <Stack.Screen name="home" component={Screen.HomeScreen} />
         <Stack.Screen
           name="search"
