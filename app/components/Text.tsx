@@ -7,6 +7,7 @@ import {
   TextProps as RNTextProps,
   TextStyle,
 } from 'react-native'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 type Presets = 'default' | 'bold' | 'label'
 
@@ -35,6 +36,10 @@ export interface TextProps extends RNTextProps {
    * The text to display if not using `tx` or nested components.
    */
   text?: string
+  /**
+   * option touchable for text component
+   */
+  onPress?: () => void
 }
 
 /**
@@ -47,7 +52,8 @@ export function Text(props: TextProps) {
     text,
     children,
     style: $styleOverride,
-    color: colorValue = colors.text,
+    color: colorValue,
+    onPress,
     ...rest
   } = props
 
@@ -56,8 +62,10 @@ export function Text(props: TextProps) {
   const $styles: StyleProp<TextStyle> = [
     $presetStyles[preset],
     $fontWeightStyles[preset],
-    {
+    colorValue && {
       color: colorValue,
+    },
+    {
       fontSize: size,
       lineHeight: size * 1.5,
     },
@@ -65,6 +73,16 @@ export function Text(props: TextProps) {
   ]
 
   const content = text || children
+
+  if (onPress) {
+    return (
+      <TouchableOpacity onPress={onPress}>
+        <RNText {...rest} style={$styles}>
+          {content}
+        </RNText>
+      </TouchableOpacity>
+    )
+  }
 
   return (
     <RNText {...rest} style={$styles}>

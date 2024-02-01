@@ -36,6 +36,13 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
         initialRouteName="home"
       >
         <Stack.Screen name="home" component={Screen.HomeScreen} />
+        <Stack.Screen
+          name="search"
+          component={Screen.SearchScreen}
+          options={{
+            animation: 'fade',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )

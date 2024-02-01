@@ -18,6 +18,7 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 interface BaseScreenProps {
+  useSafe?: boolean
   /**
    * Add content container padding : 16
    */
@@ -216,16 +217,16 @@ function ScreenWithScrolling(props: ScreenProps) {
 }
 
 export const Screen = observer((props: ScreenProps) => {
-  const insets = useSafeAreaInsets()
   const {
+    useSafe,
     backgroundColor = colors.background,
     KeyboardAvoidingViewProps,
     keyboardOffset = 16,
     StatusBarProps,
     statusBarStyle = 'light-content',
   } = props
-
-  const $containerInsets: StyleProp<ViewStyle> = {
+  const insets = useSafeAreaInsets()
+  const $safeAreaStyle: StyleProp<ViewStyle> = {
     paddingTop: insets.top,
     paddingBottom: insets.bottom,
   }
@@ -238,7 +239,7 @@ export const Screen = observer((props: ScreenProps) => {
   ]
 
   return (
-    <View style={[$containerStyle, $containerInsets, { backgroundColor }]}>
+    <View style={[$containerStyle, { backgroundColor }, useSafe && $safeAreaStyle]}>
       <StatusBar
         barStyle={statusBarStyle}
         backgroundColor={backgroundColor}

@@ -19,7 +19,7 @@ import {
   ViewStyle,
 } from 'react-native'
 import { Icon } from './Icon'
-import { colors } from 'app/theme'
+import { colors, colorTransparency } from 'app/theme'
 
 export interface TextFieldAccessoryProps {
   style: StyleProp<any>
@@ -99,7 +99,8 @@ export const TextInput = forwardRef((props: TextFieldProps, ref: Ref<RNTextInput
     $inputWrapperStyle,
     {
       borderColor: isFocus && !disabled ? colors.borderLight : colors.block,
-      backgroundColor: isFocus && !disabled ? colors.border : colors.block,
+      backgroundColor:
+        isFocus && !disabled ? colors.background2 : colorTransparency(colors.background2, 50),
     },
     TextInputProps.multiline && { minHeight: 112 },
     LeftAccessory && { paddingStart: 0 },
@@ -224,20 +225,20 @@ const $inputStyle: TextStyle = {
   height: 24,
   paddingVertical: 0,
   paddingHorizontal: 0,
-  margin: 12,
+  margin: 8,
 }
 
 const $rightAccessoryStyle: ViewStyle = {
   paddingEnd: 12,
-  height: 48,
+  height: 40,
   paddingLeft: 4,
   justifyContent: 'center',
   alignItems: 'center',
 }
 const $leftAccessoryStyle: ViewStyle = {
-  paddingEnd: 12,
-  height: 48,
-  paddingLeft: 4,
+  height: 40,
+  marginLeft: 12,
+  paddingRight: 4,
   justifyContent: 'center',
   alignItems: 'center',
 }

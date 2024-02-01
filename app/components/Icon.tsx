@@ -77,4 +77,5 @@ export const Icon = (props: IconProps) => {
 
 export const iconRegistry = {
   'x-circle-fill': require('assets/icons/x-circle-fill.png'),
+  'magnifying-glass': require('assets/icons/magnifying-glass.png'),
 }
