@@ -51,6 +51,7 @@ export const Icon = (props: IconProps) => {
     size = 24,
     style: $imageStyleOverride,
     containerStyle: $containerStyleOverride,
+    disabled,
     ...WrapperProps
   } = props
   const isPressable = !!WrapperProps.onPress
@@ -58,7 +59,7 @@ export const Icon = (props: IconProps) => {
     ? TouchableOpacity
     : View
 
-  const $iconColor = [colorValue && { tintColor: colorValue }]
+  const $iconColor = { tintColor: disabled ? colors.label : colorValue }
 
   return (
     <Wrapper
@@ -78,6 +79,9 @@ export const Icon = (props: IconProps) => {
 export const iconRegistry = {
   'x-circle-fill': require('assets/icons/x-circle-fill.png'),
   'magnifying-glass': require('assets/icons/magnifying-glass.png'),
+  'arrows-clockwise-bold': require('assets/icons/arrows-clockwise-bold.png'),
+  'caret-left-bold': require('assets/icons/caret-left-bold.png'),
+  'caret-right-bold': require('assets/icons/caret-right-bold.png'),
   'arrows-clockwise': require('assets/icons/arrows-clockwise.png'),
   'caret-left': require('assets/icons/caret-left.png'),
   'caret-right': require('assets/icons/caret-right.png'),
@@ -85,6 +89,8 @@ export const iconRegistry = {
   'dots-three-outline': require('assets/icons/dots-three-outline.png'),
   'dots-three-bold': require('assets/icons/dots-three-bold.png'),
   minus: require('assets/icons/minus.png'),
+  wallet: require('assets/icons/wallet.png'),
+  star: require('assets/icons/star.png'),
   'minus-bold': require('assets/icons/minus-bold.png'),
   'number-square-eight': require('assets/icons/number-square-eight.png'),
   'number-square-five': require('assets/icons/number-square-five.png'),

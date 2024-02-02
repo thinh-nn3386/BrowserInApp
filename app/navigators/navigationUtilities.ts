@@ -124,38 +124,3 @@ export function useNavigationPersistence(storage: Storage, persistenceKey: strin
 
   return { onNavigationStateChange, restoreState, isRestored, initialNavigationState }
 }
-
-/**
- * use this to navigate without the navigation
- * prop. If you have access to the navigation prop, do not use this.
- * @see https://reactnavigation.org/docs/navigating-without-navigation-prop/
- */
-export function navigate(name: unknown, params?: unknown) {
-  if (navigationRef.isReady()) {
-    // @ts-expect-error
-    navigationRef.navigate(name as never, params as never)
-  }
-}
-
-/**
- * This function is used to go back in a navigation stack, if it's possible to go back.
- * If the navigation stack can't go back, nothing happens.
- * The navigationRef variable is a React ref that references a navigation object.
- * The navigationRef variable is set in the App component.
- */
-export function goBack() {
-  if (navigationRef.isReady() && navigationRef.canGoBack()) {
-    navigationRef.goBack()
-  }
-}
-
-/**
- * resetRoot will reset the root navigation state to the given params.
- */
-export function resetRoot(
-  state: Parameters<typeof navigationRef.resetRoot>[0] = { index: 0, routes: [] }
-) {
-  if (navigationRef.isReady()) {
-    navigationRef.resetRoot(state)
-  }
-}
