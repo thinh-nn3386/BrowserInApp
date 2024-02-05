@@ -11,6 +11,7 @@ export type AppStackParamList = {
   home: undefined
   search: undefined
   browser: undefined
+  browserTab: undefined
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<

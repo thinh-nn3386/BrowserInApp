@@ -90,6 +90,8 @@ export const iconRegistry = {
   'dots-three-bold': require('assets/icons/dots-three-bold.png'),
   minus: require('assets/icons/minus.png'),
   wallet: require('assets/icons/wallet.png'),
+  plus: require('assets/icons/plus.png'),
+  'plus-bold': require('assets/icons/plus-bold.png'),
   star: require('assets/icons/star.png'),
   'minus-bold': require('assets/icons/minus-bold.png'),
   'number-square-eight': require('assets/icons/number-square-eight.png'),

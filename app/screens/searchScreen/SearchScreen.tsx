@@ -25,6 +25,7 @@ export const SearchScreen: FC<AppStackScreenProps<'search'>> = (props) => {
         >
           <Animated.View style={{ flex: 1, paddingLeft: 16 }}>
             <TextInput
+              autoFocus
               inputWrapperStyle={{ borderRadius: 100 }}
               placeholder="Tìm kiếm DApp hoặc Nhập URL"
               LeftAccessory={(props) => <Icon icon="magnifying-glass" {...props} />}
@@ -86,6 +87,7 @@ export const SearchScreen: FC<AppStackScreenProps<'search'>> = (props) => {
 
             <Text
               text={item.name}
+              size={14}
               style={{ textAlign: 'center', maxWidth: 56 }}
               numberOfLines={2}
             />

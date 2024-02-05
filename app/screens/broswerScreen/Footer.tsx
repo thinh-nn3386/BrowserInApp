@@ -23,7 +23,7 @@ export const Footer = ({ currentWebState, goBack, goForward, changeTabs, reload,
         justifyContent: 'space-between',
       }}
     >
-      <Icon disabled={!currentWebState.canGoBack} icon="caret-left" onPress={goBack} />
+      <Icon disabled={!currentWebState.canGoBack}  icon="caret-left" onPress={goBack} />
       <Icon disabled={!currentWebState.canGoForward} icon="caret-right" onPress={goForward} />
       <Icon icon="number-square-one" onPress={changeTabs} />
       <Icon icon="arrows-clockwise" onPress={reload} />

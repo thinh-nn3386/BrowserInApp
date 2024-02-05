@@ -1,13 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { FC, useCallback, useEffect, useRef, useState } from 'react'
 import { ActivityIndicator, BackHandler, Dimensions, Platform } from 'react-native'
-import { Icon, Screen, Text } from 'app/components'
+import { Screen } from 'app/components'
 import { colors } from 'app/theme'
 import WebView, { WebViewNavigation } from 'react-native-webview'
 import { Header } from './Heder'
 import { Footer } from './Footer'
 import { Bar } from 'react-native-progress'
+import { AppStackScreenProps } from 'app/navigators/navigator.types'
 
-export const BrowserScreen = () => {
+export const BrowserScreen: FC<AppStackScreenProps<'browser'>> = (props) => {
+  const navigation = props.navigation
   const webViewRef = useRef(null)
 
   // ------------------------PARAMS-----------------------------
@@ -27,7 +29,9 @@ export const BrowserScreen = () => {
   // ------------------------METHOD-----------------------------
   const closeBrowser = () => {}
 
-  const cacheBrowser = () => {}
+  const cacheBrowser = () => {
+    navigation.navigate('browserTab')
+  }
 
   const goBackView = () => {
     webViewRef.current?.goBack()
