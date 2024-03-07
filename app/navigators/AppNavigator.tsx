@@ -8,7 +8,6 @@ import { DarkTheme, NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { observer } from 'mobx-react-lite'
 import React from 'react'
-import { navigationRef, useBackButtonHandler } from './navigationUtilities'
 import { AppStackParamList } from './navigator.types'
 import * as Screen from 'app/screens'
 // import { NoInternetConnection } from 'app/components/utils/no-internet/NoInternet'
@@ -17,12 +16,11 @@ import * as Screen from 'app/screens'
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 export interface NavigationProps
-  extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
+  extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
 
 export const AppNavigator = observer(function AppNavigator(props: NavigationProps) {
-  useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
   return (
-    <NavigationContainer ref={navigationRef} theme={DarkTheme} {...props}>
+    <NavigationContainer theme={DarkTheme} {...props}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
@@ -30,24 +28,9 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
         initialRouteName="home"
       >
         <Stack.Screen name="home" component={Screen.HomeScreen} />
-        <Stack.Screen
-          name="search"
-          component={Screen.SearchScreen}
-          options={{
-            animation: 'fade',
-          }}
-        />
         <Stack.Screen name="browser" component={Screen.BrowserScreen} />
         <Stack.Screen name="browserTab" component={Screen.BrowserTabsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
 })
-
-/**
- * This is a list of all the route names that will exit the app if the back button
- * is pressed while in that screen. Only affects Android.
- */
-const exitRoutes: string[] = ['init', 'onBoarding']
-
-export const canExit = (routeName: string) => exitRoutes.includes(routeName)

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { RootStore, RootStoreModel } from '../RootStore'
+import { RootStore, RootStoreModel } from './RootStore'
 import { setupRootStore } from './setupRootStore'
 
 /**
@@ -54,17 +54,17 @@ export const useInitialRootStore = (callback: () => void | Promise<void>) => {
   // Kick off initial async loading actions, like loading fonts and rehydrating RootStore
   useEffect(() => {
     let _unsubscribe
-    ;(async () => {
-      // set up the RootStore (returns the state restored from AsyncStorage)
-      const { unsubscribe } = await setupRootStore(rootStore)
-      _unsubscribe = unsubscribe
+      ; (async () => {
+        // set up the RootStore (returns the state restored from AsyncStorage)
+        const { unsubscribe } = await setupRootStore(rootStore)
+        _unsubscribe = unsubscribe
 
-      // let the app know we've finished rehydrating
-      setRehydrated(true)
+        // let the app know we've finished rehydrating
+        setRehydrated(true)
 
-      // invoke the callback, if provided
-      if (callback) callback()
-    })()
+        // invoke the callback, if provided
+        if (callback) callback()
+      })()
 
     return () => {
       // cleanup

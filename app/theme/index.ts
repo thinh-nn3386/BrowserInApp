@@ -6,9 +6,6 @@ export const colors = {
   primary: palette.blue1,
   white: palette.white,
 
-  /**
-   * Functional color
-   */
   link: palette.blue,
   success: palette.green,
   warning: palette.orange,
@@ -43,4 +40,3 @@ export const colorTransparency = (
   return hexColor + transparencyForHex[transparency]
 }
 
-export const colorsDark = {}

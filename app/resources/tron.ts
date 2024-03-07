@@ -1,0 +1,303 @@
+import { DAppType } from "./type";
+
+export const tronDApps: DAppType[] = [
+  {
+    dappId: 233,
+    name: 'Blockchain Cuties',
+    description: 'An NFT collectible game with adventures!',
+    fullDescription: 'Cutest collectible game with adventures on 7 blockchains where you get to play with puppies, dragons, bear cubs, cats, and other real and fantasy creatures alike!',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/233/blockchaincuties-dapp-games-ethereum-logo_5c912cd893fc827dc32f052fea38b9bd.png',
+    website: 'https://blockchaincuties.com/',
+    chains: ['eip155:1', 'eip155:137', 'tron:728126428'],
+    categories: ['games'],
+    socialLinks: [
+      {
+        title: 'discord',
+        url: 'https://discord.gg/C6KCEU7',
+        type: 'discord',
+      },
+      {
+        title: 'facebook',
+        url: 'https://www.facebook.com/blockchaincuties/',
+        type: 'facebook',
+      },
+      {
+        title: 'instagram',
+        url: 'https://www.instagram.com/blockchain_cuties/',
+        type: 'instagram',
+      },
+      {
+        title: 'medium',
+        url: 'https://medium.com/@blockchaincutie',
+        type: 'medium',
+      },
+      {
+        title: 'other',
+        url: 'https://t.me/blockchaincuties_en',
+        type: 'other',
+      },
+      {
+        title: 'reddit',
+        url: 'https://www.reddit.com/user/blockchaincuties/',
+        type: 'reddit',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/bcuties_jp',
+        type: 'twitter',
+      },
+      {
+        title: 'youtube',
+        url: 'https://www.youtube.com/blockchaincuties',
+        type: 'youtube',
+      },
+    ],
+
+  },
+  {
+    dappId: 1551,
+    name: '0xWarriors',
+    description: '0xWarriors is a multiplayer RPG that lets players manage squads of warriors and equip them with unique weapons and armor.',
+    fullDescription: '0xWarriors is a multiplayer RPG that lets players manage squads of up to five warriors and equip them with hundreds of unique weapons and armor. Each warrior can be customized to have an original style and skillset. Gamers can purchase chests containing various items or win them in battles and tournaments to later trade them for profit. Level up and gear up to create your own epic team to dominate the combat arena!',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/1551/0xwarriors-dapp-games-eth-logo_0776ab544ecf896dec519eb1cd48380c.png',
+    website: 'https://0xwarriors.com',
+    chains: ['eip155:1', 'eip155:137', 'tron:728126428'],
+    categories: ['games'],
+    socialLinks: [
+      {
+        title: 'discord',
+        url: 'https://discordapp.com/invite/zhEhzeB',
+        type: 'discord',
+      },
+      {
+        title: 'facebook',
+        url: 'https://www.facebook.com/0xwarriors/',
+        type: 'facebook',
+      },
+      {
+        title: 'telegram',
+        url: 'https://t.me/OxWarriors',
+        type: 'telegram',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/0xWarriors',
+        type: 'twitter',
+      },
+    ],
+  },
+  {
+    dappId: 1559,
+    name: '0xRacers',
+    description: '0xRacers is a multiplayer open-economy racing manager where players get to own their cars, tune them up for better performance with unique auto parts, join epic racing events and profit while playing.',
+    fullDescription: '0xRacers is a multiplayer open-economy racing manager where players get to own their cars, tune them up for better performance with unique auto parts, join epic racing events and profit while playing.',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/1559/0xracers-dapp-games-ethereum-logo_8d7138d481808342284391ccee40fbb1.png',
+    website: 'https://0xracers.com',
+    chains: ['eip155:1', 'eip155:137', 'tron:728126428'],
+    categories: ['games'],
+    socialLinks: [
+      {
+        title: 'discord',
+        url: 'https://discordapp.com/invite/5yfn94W',
+        type: 'discord',
+      },
+      {
+        title: 'facebook',
+        url: 'https://www.facebook.com/0xRacers/',
+        type: 'facebook',
+      },
+      {
+        title: 'telegram',
+        url: 'https://t.me/OxRacers',
+        type: 'telegram',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/0xracers',
+        type: 'twitter',
+      },
+    ],
+  },
+  {
+    dappId: 1684,
+    name: 'BLOCKLORDS',
+    description: 'BLOCKLORDS is a grand strategy game set in medieval Europe that lets players create heroes, trade items, conquer cities, and earn taxes on sales made within their realm. Pushing a new kind of user-driven economy, the BLOCKLORDS team dreams of a future where players will be able to earn an income from their in-game activities.',
+    fullDescription: 'BLOCKLORDS is a grand strategy game set in medieval Europe that lets players create heroes, trade items, conquer cities, and earn taxes on sales made within their realm. Pushing a new kind of user-driven economy, the BLOCKLORDS team dreams of a future where players will be able to earn an income from their in-game activities. BLOCKLORDS is the recipient of two DAPP development awards, one from NEO.GAME and one from the TRON Accelerator. The game was released on NEO and TRON in early 2019 and now looks towards a scalable future with its launch on the ETH and LOOM network! For more information, visit our website',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/1684/blocklords-dapp-games-1684-logo_0060d6808a315ce387b704ea672ba2c0.png',
+    website: 'https://play.blocklords.io',
+    chains: ['eip155:1', 'tron:728126428'],
+    categories: ['games'],
+    socialLinks: [
+      {
+        title: 'blog',
+        url: 'https://www.blocklords.io/blog',
+        type: 'blog',
+      },
+      {
+        title: 'discord',
+        url: 'https://discord.com/invite/K64J3Vw',
+        type: 'discord',
+      },
+      {
+        title: 'facebook',
+        url: 'https://www.facebook.com/blocklordsgame',
+        type: 'facebook',
+      },
+      {
+        title: 'github',
+        url: 'https://github.com/blocklords',
+        type: 'github',
+      },
+      {
+        title: 'medium',
+        url: 'https://medium.com/@info_14956',
+        type: 'medium',
+      },
+      {
+        title: 'telegram',
+        url: 'https://t.me/joinchat/HTe6QQ-6yvYziHUzbr2YPA',
+        type: 'telegram',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/blocklords',
+        type: 'twitter',
+      },
+      {
+        title: 'youtube',
+        url: 'https://www.youtube.com/channel/UCpfBqIQsy8Wo4EzCFAr8EHQ',
+        type: 'youtube',
+      },
+    ],
+  },
+  {
+    dappId: 2296,
+    name: 'TRONDice',
+    description: 'TRONDice was developed based on TRON blockchain technology, aiming to build a fair, just, and open blockchain lottery gaming platform.',
+    fullDescription: 'TRONDice was developed based on TRON blockchain technology, aiming to build a fair, just, and open blockchain lottery gaming platform.',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/2296/trondice-dapp-gambling-tron-logo_7c72334fdbfb1af6db5ffa073b107d35.png',
+    website: 'https://trondice.org/',
+    chains: ['tron:728126428'],
+    categories: ['gambling'],
+    socialLinks: [],
+  },
+  {
+    dappId: 2297,
+    name: 'WINk',
+    description: 'E-gaming platform on the TRON network',
+    fullDescription: 'By combining our experience in providing users with thrilling games and our expertise in blockchain technology, we will remove all the nasty sign-ups, shady house edges, and poor player experience to create WINk: The world’s first trustless, permission-less, and high-performance e-gaming platform on the TRON network.',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/2297/wink-dapp-gambling-tron-logo_fd6fc7ddca53a1a933b90977be80d811.png',
+    website: 'https://www.wink.org/',
+    chains: ['tron:728126428'],
+    categories: ['gambling'],
+    socialLinks: [],
+  },
+  {
+    dappId: 2298,
+    name: 'HitDAPPs',
+    description: 'Decentralized gambling platform that supports TRON & EOS dapps',
+    fullDescription: 'Decentralized gambling platform that supports TRON & EOS dapps. Current game modes: P2P Dice, FOMO, DICE, COINFLIP, Fruit Farm and LOTTO.',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/2298/hitdapps-dapp-gambling-tron-logo_93370b67e48826d5c79b11a740edfe76.png',
+    website: 'https://hitdapps.com/',
+    chains: ['tron:728126428'],
+    categories: ['gambling'],
+    socialLinks: [],
+  },
+  {
+    dappId: 2299,
+    name: 'TronWin',
+    description: 'TronWin is a game platform for fair games on the TRON network',
+    fullDescription: 'TronWin is a game platform for fair games on the TRON network. Currently, there is one lottery game on the platform, with built-in WIN token for gaming, dividends, and further usage.',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/2299/tronwin-dapp-gambling-tron-logo_1cc9f8250256d5f352999edc1a299475.png',
+    website: 'https://tronwin.io/',
+    chains: ['tron:728126428'],
+    categories: ['gambling'],
+    socialLinks: [
+      {
+        title: 'telegram',
+        url: 'https://t.me/tronwinio',
+        type: 'telegram',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/tronwin_io',
+        type: 'twitter',
+      },
+    ],
+  },
+  {
+    dappId: 2317,
+    name: '888STARZ.BET',
+    description: '888STARZ is the world’s 1st DeFi bookmaker. Enjoy yield farming & earn commissions on top of 65% profit share!',
+    fullDescription: '888starz.bet - the World’s 1st DeFi bookmaker! 888starz offers you a truly unique profit sharing reward model. Whenever you place a bet, you automatically mine 888Tron tokens and become a co-owner of the professional licensed casino & sports betting platform.  Every day you receive your share of the profits!  By staking your 888Tron tokens you get up to 30% APY.  Our DeFi system also allows you to use your 888Tron tokens to get two extra benefits: ●  YIELD FARM 888tokens with an APY of up to 200%. ●  EARN COMMISSIONS for every exchange up to 10% APY. If you can’t beat the house, own it!  With 888starz every bet is a safe investment in your future financial success. You can get a combined APY of up to 235%. See you at 888starz, where YOU ALWAYS WIN!',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/2317/888starzbet-dapp-defi-tron-logo_4a268c239c9c06be796568e9a43b73d5.png',
+    website: 'https://888starz.com/',
+    chains: ['tron:728126428'],
+    categories: ['gambling'],
+    socialLinks: [
+      {
+        title: 'facebook',
+        url: 'https://www.facebook.com/888TRONcom-464463437679327/',
+        type: 'facebook',
+      },
+      {
+        title: 'github',
+        url: 'https://github.com/888tron/contracts',
+        type: 'github',
+      },
+      {
+        title: 'instagram',
+        url: 'https://www.instagram.com/888.starz/',
+        type: 'instagram',
+      },
+      {
+        title: 'telegram',
+        url: 'https://t.me/joinchat/Q5D7K5Kw7mWY4PRf',
+        type: 'telegram',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/888Tron',
+        type: 'twitter',
+      },
+    ],
+  },
+  {
+    dappId: 2829,
+    name: 'Zethyr Finance',
+    description: 'The #1 DeFi application on the TRON blockchain',
+    fullDescription: 'The #1 DeFi application on the TRON blockchain',
+    logo: 'https://dashboard-assets.dappradar.com/geRRcWz9IdTwSrm1/document/2829/zethyr-finance-other-tron-logo_b27d60f666bd08add4116e4474abf2b7.png',
+    website: 'https://zethyr.finance/',
+    chains: ['tron:728126428'],
+    categories: ['defi'],
+    socialLinks: [
+      {
+        title: 'blog',
+        url: 'https://blog.zethyr.exchange/',
+        type: 'blog',
+      },
+      {
+        title: 'medium',
+        url: 'https://medium.com/@zethyrexchange',
+        type: 'medium',
+      },
+      {
+        title: 'telegram',
+        url: 'https://t.me/zethyrexchange',
+        type: 'telegram',
+      },
+      {
+        title: 'twitter',
+        url: 'https://twitter.com/ZethyrExchange',
+        type: 'twitter',
+      },
+      {
+        title: 'youtube',
+        url: 'https://www.youtube.com/channel/UCxyXOGCPxG8D06opjTSjW8g',
+        type: 'youtube',
+      },
+    ],
+  },
+
+]
