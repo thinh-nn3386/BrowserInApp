@@ -93,6 +93,7 @@ export const iconRegistry = {
   plus: require('assets/icons/plus.png'),
   'plus-bold': require('assets/icons/plus-bold.png'),
   star: require('assets/icons/star.png'),
+  'star-fill': require('assets/icons/star-fill.png'),
   'minus-bold': require('assets/icons/minus-bold.png'),
   'number-square-eight': require('assets/icons/number-square-eight.png'),
   'number-square-five': require('assets/icons/number-square-five.png'),
@@ -104,5 +105,7 @@ export const iconRegistry = {
   'number-square-three': require('assets/icons/number-square-three.png'),
   'number-square-two': require('assets/icons/number-square-two.png'),
   x: require('assets/icons/x.png'),
+  browser: require('assets/icons/browser.png'),
   'x-bold': require('assets/icons/x-bold.png'),
+  'google-chrome-logo': require('assets/icons/google-chrome-logo.png'),
 }

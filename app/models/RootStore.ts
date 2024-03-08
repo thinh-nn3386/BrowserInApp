@@ -3,7 +3,6 @@ import RNFS from 'react-native-fs'
 import { dappsList } from 'app/resources/data'
 import { DAppType, WebsiteType } from 'app/resources/type'
 
-
 const withSetPropAction = <T extends IStateTreeNode>(mstInstance: T) => ({
   // generic setter for all properties
   setProp<K extends keyof SnapshotIn<T>, V extends SnapshotIn<T>[K]>(field: K, newValue: V) {
@@ -12,17 +11,17 @@ const withSetPropAction = <T extends IStateTreeNode>(mstInstance: T) => ({
   },
 })
 
-export const RootStoreModel = types.model('RootStore').props({
-  dapps: types.optional(types.array(types.frozen<DAppType>()), dappsList),
-  favoriteDApps: types.optional(types.array(types.frozen<DAppType>()), []),
-  disableWarningUrl: types.optional(types.array(types.string), []),
-  browserTabs: types.optional(types.array(types.frozen<WebsiteType>()), []),
-  recentAccesshDapps: types.optional(types.array(types.frozen<DAppType>()), []),
-}).actions(withSetPropAction)
+export const RootStoreModel = types
+  .model('RootStore')
+  .props({
+    dapps: types.optional(types.array(types.frozen<DAppType>()), dappsList),
+    favoriteDApps: types.optional(types.array(types.frozen<DAppType>()), []),
+    disableWarningUrl: types.optional(types.array(types.string), []),
+    browserTabs: types.optional(types.array(types.frozen<WebsiteType>()), []),
+    recentAccesshDapps: types.optional(types.array(types.frozen<DAppType>()), []),
+  })
+  .actions(withSetPropAction)
   .views((self) => ({
-    get isDisableOpenMoreTabs() {
-      return self.browserTabs.length > 9
-    },
     get tabsImageFolderPath() {
       return RNFS.DocumentDirectoryPath + `/ready/browsers`
     },
@@ -90,7 +89,6 @@ export const RootStoreModel = types.model('RootStore').props({
       self.setProp('disableWarningUrl', [...self.disableWarningUrl, url])
       self.disableWarningUrl = cast([...self.disableWarningUrl, url])
     },
-
   }))
   .actions((self) => ({
     isFavoriteDApp: (dapp: DAppType) => {
@@ -101,15 +99,11 @@ export const RootStoreModel = types.model('RootStore').props({
     },
   }))
 
-
-
-
 /**
  * The RootStore instance.
  */
-export interface RootStore extends Instance<typeof RootStoreModel> { }
+export interface RootStore extends Instance<typeof RootStoreModel> {}
 /**
  * The data of a RootStore.
  */
-export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> { }
-
+export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> {}

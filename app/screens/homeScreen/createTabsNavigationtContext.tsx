@@ -36,9 +36,9 @@ export function createTabsNavigationComponent<T>(Component: T): T {
   return TabsNavigationComponent as unknown as T
 }
 
-export function useTabsAnimatedHeader() {
+export function useTabsAnimatedHeader(flatListRef: React.MutableRefObject<any>) {
   const { translationY } = useTabsNavigationContext()
-  const flatListRef = useRef(null)
+  const ref2 = useRef(flatListRef.current || null)
   const prevY = useSharedValue(0)
   const scrollDirection = useSharedValue<'down' | 'up'>('up')
 
@@ -52,15 +52,25 @@ export function useTabsAnimatedHeader() {
   const onScrollEndDrag = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     if (event.nativeEvent.contentOffset.y > Header_Max_Height) return
 
-    flatListRef?.current?.scrollToOffset({
-      offset: scrollDirection.value === 'down' ? Header_Max_Height : Header_Min_Height,
-      animated: true,
-    })
+    if (ref2?.current?.scrollToLocation) {
+      ref2?.current?.scrollToLocation({
+        viewOffset: scrollDirection.value === 'down' ? Header_Max_Height : Header_Min_Height,
+        itemIndex: 0,
+        animated: true,
+      })
+    }
+
+    if (ref2?.current?.scrollToOffset) {
+      ref2?.current?.scrollToOffset({
+        offset: scrollDirection.value === 'down' ? Header_Max_Height : Header_Min_Height,
+        animated: true,
+      })
+    }
   }
-  const scrollEventThrottle = 16
   return {
-    flatListRef,
-    scrollEventThrottle,
+    alwaysBounceVertical: false,
+    flatListRef: ref2,
+    scrollEventThrottle: 16,
     onScroll,
     onScrollEndDrag,
   }

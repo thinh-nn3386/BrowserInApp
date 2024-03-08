@@ -5,7 +5,7 @@ import { DAppType, WebsiteType } from 'app/resources/type'
 import { useCallback } from 'react'
 
 export const useTabNavigation = () => {
-  const navigation: BottomTabsScreenProps<'dappHome'>['navigation'] = useNavigation()
+  const navigation = useNavigation() as any
   const store = useStores()
   const { getUuid } = useHelper()
 
@@ -16,7 +16,6 @@ export const useTabNavigation = () => {
   const openAppOrBrowser = useCallback(
     (item: DAppType) => {
       if (store.isDisableWarning(item)) {
-
         const tabData: WebsiteType = {
           title: item.name,
           url: item.website,
@@ -37,8 +36,16 @@ export const useTabNavigation = () => {
     [store.disableWarningUrl]
   )
 
+  const openUrl = (tab: WebsiteType) => {
+    navigation.navigate('dappStack', {
+      screen: 'browser',
+      params: { screen: 'website' + tab.id, params: tab },
+    })
+  }
+
   return {
     openAppOrBrowser,
     openApp,
+    openUrl,
   }
 }

@@ -1,14 +1,15 @@
 import React from 'react'
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import { Icon, Text } from 'app/components'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
-import { colorTransparency, colors } from 'app/theme'
+import { colors } from 'app/theme'
 import { Header_Max_Height, useTabsNavigationContext } from './createTabsNavigationtContext'
 
 interface Props {
   tabIndex: number
   setTabIndex: (val: number) => void
   onSearch: () => void
+  routes: { key: string }[]
 }
 
 export const TabHeader = (props: Props) => {
@@ -21,48 +22,41 @@ export const TabHeader = (props: Props) => {
   })
 
   return (
-    <View style={{ height: 50, flexDirection: 'row', alignItems: 'center' }}>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 16, paddingVertical: 12 }}
+    <View
+      style={{
+        height: 50,
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: colors.border,
+      }}
+    >
+      <View
+        style={{
+          paddingVertical: 12,
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
       >
-        <AnimatedLabel index={0} text={'Khám phá'} {...props} />
-        <AnimatedLabel index={1} text={'Xếp hạng'} {...props} />
-        <AnimatedLabel index={2} text={'Yêu thích'} {...props} />
-      </ScrollView>
+        {props.routes.map((e, index) => (
+          <AnimatedLabel key={e.key} index={index} text={e.key} {...props} />
+        ))}
+      </View>
 
       <Animated.View
         style={[
           {
             position: 'absolute',
             right: 0,
-            backgroundColor: colorTransparency(colors.background, 20),
-            paddingLeft: 6,
           },
           $searchIconStyle,
         ]}
       >
-        <View
-          style={{
-            marginTop: 4,
-            backgroundColor: colorTransparency(colors.background, 40),
-            paddingLeft: 6,
-          }}
-        >
-          <View
-            style={{
-              backgroundColor: colorTransparency(colors.background, 80),
-              paddingLeft: 6,
-            }}
-          >
-            <Icon
-              icon="magnifying-glass"
-              containerStyle={{ paddingHorizontal: 16, backgroundColor: colors.background }}
-              onPress={props.onSearch}
-            />
-          </View>
-        </View>
+        <Icon
+          icon="magnifying-glass"
+          containerStyle={{ paddingHorizontal: 16 }}
+          onPress={props.onSearch}
+        />
       </Animated.View>
     </View>
   )
@@ -80,16 +74,24 @@ const AnimatedLabel = ({
   setTabIndex: (val: number) => void
 }) => {
   return (
-    <Text
+    <View
       style={{
-        marginRight: 16,
+        paddingHorizontal: 16,
+        borderBottomWidth: 2,
+        height: 50,
+        justifyContent: 'center',
+        borderBottomColor: tabIndex === index ? colors.link : colors.transparent,
       }}
-      preset={tabIndex === index ? 'bold' : 'label'}
-      size={20}
-      onPress={() => {
-        setTabIndex(index)
-      }}
-      text={text}
-    />
+    >
+      <Text
+        preset={tabIndex === index ? 'bold' : 'label'}
+        size={20}
+        onPress={() => {
+          setTabIndex(index)
+        }}
+        text={text}
+        color={tabIndex === index ? colors.link : colors.label}
+      />
+    </View>
   )
 }
