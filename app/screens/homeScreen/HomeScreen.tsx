@@ -8,7 +8,7 @@ import { createTabsNavigationComponent } from './createTabsNavigationtContext'
 import { AppStackScreenProps } from 'app/navigators/navigator.types'
 import { DAppsList } from './dappList/DAppsList'
 import { observer } from 'mobx-react-lite'
-import Animated, { FadeInDown, FadeInUp, FadeOut } from 'react-native-reanimated'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 import { colors } from 'app/theme'
 
 export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationComponent(

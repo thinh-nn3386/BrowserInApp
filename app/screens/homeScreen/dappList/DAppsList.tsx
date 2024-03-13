@@ -11,7 +11,6 @@ import { observer } from 'mobx-react-lite'
 import { useStores } from 'app/models'
 import { Text } from 'app/components/Text'
 import { DAppType } from 'app/resources/type'
-import { useHelper } from 'app/hooks/useHelper'
 import { useTabsAnimatedHeader } from '../createTabsNavigationtContext'
 import { useTabNavigation } from '../useTabNavigation'
 import { capitalizeFirstLetter, isValidUrl, sorteDAppByCategories } from './utils'
@@ -42,10 +41,9 @@ interface Props {
 export const DAppsList = observer(
   forwardRef(({ searchText, isCategory, contentContainerStyle, isFavorite }: Props, ref: any) => {
     const store = useStores()
-    const { getUuid } = useHelper()
 
     const { flatListRef, ...scrollAnimatedConfig } = useTabsAnimatedHeader(ref)
-    const { openAppOrBrowser, openApp, openUrl } = useTabNavigation()
+    const { openAppOrBrowser, openApp } = useTabNavigation()
 
     const dappDatas = !isFavorite ? store.dapps.toJSON() : store.favoriteDApps.toJSON()
     // ----------------------------PARAMS-----------------------------

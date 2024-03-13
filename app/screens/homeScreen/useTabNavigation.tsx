@@ -9,7 +9,7 @@ export const useTabNavigation = () => {
   const { getUuid } = useHelper()
 
   const openApp = (dapp: DAppType) => {
-    navigation.navigate('dappStack', { screen: 'detail', params: { dapp } })
+    navigation.navigate('detail', { dapp })
   }
 
   const openAppOrBrowser =
@@ -23,17 +23,17 @@ export const useTabNavigation = () => {
       // create new tab
       store.addBrowserTabs(tabData)
       store.addRecentAccessDapps(item)
-      navigation.navigate('dappStack', {
-        screen: 'browser',
-        params: { screen: 'website' + tabData.id, params: tabData },
-      })
+      navigation.navigate(
+        'browser',
+        { screen: 'website' + tabData.id, params: tabData },
+      )
     }
 
   const openUrl = (tab: WebsiteType) => {
-    navigation.navigate('dappStack', {
-      screen: 'browser',
-      params: { screen: 'website' + tab.id, params: tab },
-    })
+    navigation.navigate(
+      'browser',
+      { screen: 'website' + tab.id, params: tab },
+    )
   }
 
   return {

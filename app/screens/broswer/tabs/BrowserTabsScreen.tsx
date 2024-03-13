@@ -32,6 +32,7 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
       useSafe
       header={
         <View style={{
+          paddingHorizontal: 16,
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between"

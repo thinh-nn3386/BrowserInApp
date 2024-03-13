@@ -45,7 +45,7 @@ export function useTabsAnimatedHeader(flatListRef: React.MutableRefObject<any>) 
   const scrollDirection = useSharedValue<'down' | 'up'>('up')
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (!IS_ANDROID) return
+    if (IS_ANDROID) return
     const offsetY = event.nativeEvent.contentOffset.y
     scrollDirection.value = offsetY - prevY.value > 0 ? 'down' : 'up'
     prevY.value = offsetY
@@ -53,7 +53,7 @@ export function useTabsAnimatedHeader(flatListRef: React.MutableRefObject<any>) 
   }
 
   const onScrollEndDrag = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    if (!IS_ANDROID) return
+    if (IS_ANDROID) return
     if (event.nativeEvent.contentOffset.y > Header_Max_Height) return
 
     if (ref2?.current?.scrollToLocation) {

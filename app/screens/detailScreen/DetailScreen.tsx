@@ -6,8 +6,8 @@ import { AppStackScreenProps } from 'app/navigators/navigator.types'
 import { WebsiteType } from 'app/resources/type'
 import { colorTransparency, colors } from 'app/theme'
 import { observer } from 'mobx-react-lite'
-import React, { FC, useEffect, useMemo, useState } from 'react'
-import { Button, View } from 'react-native'
+import React, { FC, useMemo } from 'react'
+import { TouchableOpacity, View } from 'react-native'
 
 export const DetailScreen: FC<AppStackScreenProps<'detail'>> = observer((props) => {
   const store = useStores()
@@ -50,6 +50,7 @@ export const DetailScreen: FC<AppStackScreenProps<'detail'>> = observer((props) 
       backgroundColor={colors.background2}
       header={
         <View style={{
+          paddingHorizontal: 16,
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between"
@@ -57,7 +58,7 @@ export const DetailScreen: FC<AppStackScreenProps<'detail'>> = observer((props) 
           <Icon icon="arrow-left" onPress={navigation.goBack} />
           <Text preset='bold' text={dapp.name} />
           <Icon icon={isFavorite ? 'star-fill' : 'star'}
-            color={isFavorite ? colors.warning : colors.text} onPress={navigation.goBack} />
+            color={isFavorite ? colors.warning : colors.text} onPress={toggleFavorite} />
         </View>
       }
       footer={
@@ -65,18 +66,28 @@ export const DetailScreen: FC<AppStackScreenProps<'detail'>> = observer((props) 
           style={{
             paddingTop: 12,
             marginBottom: 16,
+            paddingHorizontal: 16
           }}
         >
-          <Button
-            title={"Open App"}
-            onPress={openApp}
-            color={colors.primary}
-          />
+          <TouchableOpacity onPress={openApp}
+            style={{
+              paddingVertical: 8,
+              paddingHorizontal: 16,
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 12,
+              backgroundColor: colors.primary
+            }}>
+            <Text text="Open App" color={colors.text} />
+          </TouchableOpacity>
+
         </View>
       }
     >
       <View
         style={{
+          marginTop: 16,
+          paddingHorizontal: 16,
           flexDirection: 'row',
           alignItems: 'center',
         }}
@@ -129,6 +140,7 @@ export const DetailScreen: FC<AppStackScreenProps<'detail'>> = observer((props) 
           marginVertical: 16,
           paddingVertical: 12,
           paddingHorizontal: 16,
+          marginHorizontal: 16,
           borderRadius: 12,
           borderWidth: 1,
           borderColor: colors.border,
@@ -149,7 +161,7 @@ export const DetailScreen: FC<AppStackScreenProps<'detail'>> = observer((props) 
       <Text
         text={dapp.fullDescription}
         color={colors.label}
-        style={{ marginBottom: 12, lineHeight: 20 }}
+        style={{ marginBottom: 12, lineHeight: 20, paddingHorizontal: 16, }}
         size={14}
       />
     </Screen>

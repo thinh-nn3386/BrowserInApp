@@ -70,7 +70,7 @@ export const BrowserScreen: FC<BrowserTabsScreenProps<'website'>> = observer((pr
 
   const closeBrowser = () => {
     store.removeBrowserTabs(tabs.id)
-    navigation.navigate('dappHome')
+    navigation.navigate('home')
   }
 
   const goBackView = () => {
