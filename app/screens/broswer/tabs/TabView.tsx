@@ -1,8 +1,7 @@
 import { colors } from 'app/theme'
 import React from 'react'
-import { Dimensions, View } from 'react-native'
+import { Dimensions, View, Image } from 'react-native'
 import { Text, Icon } from 'app/components'
-import WebView from 'react-native-webview'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export const NUMBER_OF_COLUMN = 2
@@ -10,14 +9,17 @@ const SPACE = 20
 const ITEM_WIDTH = (Dimensions.get('screen').width - 60) / 2
 
 interface Props {
-  item: any
+  title: string
+  localImage: string
+  lastUpdate: number
   index: number
   onPress: () => void
+  onClose: () => void
 }
 
-export const TabView = ({ item, index, onPress }: Props) => {
+export const TabView = ({ title, localImage, lastUpdate, index, onPress, onClose }: Props) => {
   return (
-    <TouchableOpacity
+    <View
       style={{
         width: ITEM_WIDTH,
         height: ITEM_WIDTH + 40,
@@ -25,7 +27,6 @@ export const TabView = ({ item, index, onPress }: Props) => {
         marginLeft: index % NUMBER_OF_COLUMN !== 0 ? SPACE : 0,
         overflow: 'hidden',
       }}
-      onPress={onPress}
     >
       <View
         style={{
@@ -37,22 +38,14 @@ export const TabView = ({ item, index, onPress }: Props) => {
           justifyContent: 'space-between',
         }}
       >
-        <View
-          style={{
-            width: 24,
-            height: 24,
-            borderRadius: 100,
-            backgroundColor: colors.background2,
-            marginRight: 4,
-          }}
-        />
         <Text
-          text="asdasd asdasdasd"
+          text={title}
           numberOfLines={1}
-          size={14}
+          size={12}
           ellipsizeMode="tail"
           style={{
-            maxWidth: ITEM_WIDTH - 60,
+            marginLeft: 12,
+            maxWidth: ITEM_WIDTH - 48,
           }}
         />
         <Icon
@@ -62,13 +55,27 @@ export const TabView = ({ item, index, onPress }: Props) => {
           containerStyle={{
             padding: 4,
           }}
+          onPress={onClose}
         />
       </View>
-      <WebView
-        source={{ uri: 'https://infinite.red' }}
-        style={{ backgroundColor: colors.background2, flex: 1 }}
-        pointerEvents="none"
-      />
-    </TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
+        <View
+          style={{
+            width: ITEM_WIDTH,
+            height: ITEM_WIDTH,
+            backgroundColor: colors.background,
+          }}
+        >
+          {!!localImage && (
+            <Image
+              key={lastUpdate}
+              source={{ uri: "file://" + localImage }}
+              style={{ flex: 1, maxWidth: ITEM_WIDTH }}
+              resizeMode="cover"
+            />
+          )}
+        </View>
+      </TouchableOpacity>
+    </View>
   )
 }

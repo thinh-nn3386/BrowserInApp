@@ -16,7 +16,6 @@ export const RootStoreModel = types
   .props({
     dapps: types.optional(types.array(types.frozen<DAppType>()), dappsList),
     favoriteDApps: types.optional(types.array(types.frozen<DAppType>()), []),
-    disableWarningUrl: types.optional(types.array(types.string), []),
     browserTabs: types.optional(types.array(types.frozen<WebsiteType>()), []),
     recentAccesshDapps: types.optional(types.array(types.frozen<DAppType>()), []),
   })
@@ -84,26 +83,18 @@ export const RootStoreModel = types
       }
       self.setProp('browserTabs', temp)
     },
-
-    addDisableWarningUrl: (url: string) => {
-      self.setProp('disableWarningUrl', [...self.disableWarningUrl, url])
-      self.disableWarningUrl = cast([...self.disableWarningUrl, url])
-    },
   }))
   .actions((self) => ({
     isFavoriteDApp: (dapp: DAppType) => {
       return self.favoriteDApps.some((e) => e.website === dapp.website)
-    },
-    isDisableWarning: (dapp: DAppType) => {
-      return self.disableWarningUrl.includes(dapp.website)
-    },
+    }
   }))
 
 /**
  * The RootStore instance.
  */
-export interface RootStore extends Instance<typeof RootStoreModel> {}
+export interface RootStore extends Instance<typeof RootStoreModel> { }
 /**
  * The data of a RootStore.
  */
-export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> {}
+export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> { }

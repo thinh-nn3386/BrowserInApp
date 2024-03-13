@@ -55,9 +55,7 @@ export const Screen = observer((props: ScreenProps) => {
     <View style={[$containerStyle, { backgroundColor }, useSafe && $safeAreaStyle]}>
       <StatusBar barStyle={'light-content'} backgroundColor={backgroundColor} translucent />
 
-      <KeyboardAvoidingView
-        behavior={isIos ? 'padding' : 'height'}
-        keyboardVerticalOffset={16}
+      <View
         style={$keyboardAvoidingViewStyle}
       >
         {!!props.header && <View>{props.header}</View>}
@@ -67,7 +65,7 @@ export const Screen = observer((props: ScreenProps) => {
         </View>
 
         {!!props.footer && <View>{props.footer}</View>}
-      </KeyboardAvoidingView>
+      </View>
     </View>
   )
 })

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react'
 import { Screen } from 'app/components'
-import { useWindowDimensions } from 'react-native'
+import { FlatList, SectionList, TextInput, StyleSheet, useWindowDimensions } from 'react-native'
 import { TabView } from 'react-native-tab-view'
 import { TabHeader } from './TabHeader'
 import { UrlInput } from './UrlInput'
@@ -8,6 +8,8 @@ import { createTabsNavigationComponent } from './createTabsNavigationtContext'
 import { AppStackScreenProps } from 'app/navigators/navigator.types'
 import { DAppsList } from './dappList/DAppsList'
 import { observer } from 'mobx-react-lite'
+import Animated, { FadeInDown, FadeInUp, FadeOut } from 'react-native-reanimated'
+import { colors } from 'app/theme'
 
 export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationComponent(
   observer((props) => {
@@ -20,14 +22,16 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
     const [index, setIndex] = React.useState(0)
     const [routes] = React.useState([{ key: 'Explore' }, { key: 'Favorites' }])
 
-    const flatListRef1 = useRef(null)
-    const flatListRef2 = useRef(null)
+    const flatListRef1 = useRef<SectionList>(null)
+    const flatListRef2 = useRef<FlatList>(null)
+    const textInputRef = useRef<TextInput>(null)
 
     const onSearch = () => {
       if (flatListRef1?.current?.scrollToLocation) {
         flatListRef1?.current?.scrollToLocation({
           viewOffset: 0,
           itemIndex: 0,
+          sectionIndex: 0,
           animated: true,
         })
       }
@@ -38,6 +42,9 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
           animated: true,
         })
       }
+
+      textInputRef.current.focus()
+
       setIsSearching(true)
     }
 
@@ -46,11 +53,13 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
     return (
       <Screen useSafe contentContainerStyle={{ flex: 1 }}>
         <UrlInput
+          ref={textInputRef}
           isSearchinh={isSearchinh}
           searchText={searchText}
           setIsSearching={setIsSearching}
           setSearchText={setSearchText}
         />
+
 
         <TabHeader routes={routes} tabIndex={index} setTabIndex={setIndex} onSearch={onSearch} />
         <TabView
@@ -70,6 +79,15 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
           lazy
           initialLayout={{ width: layout.width }}
         />
+        {isSearchinh && (
+          <Animated.View entering={FadeInDown} style={{
+            ...StyleSheet.absoluteFillObject,
+            top: 56,
+            backgroundColor: colors.background2
+          }}>
+            <DAppsList searchText={searchText} />
+          </Animated.View>
+        )}
       </Screen>
     )
   })

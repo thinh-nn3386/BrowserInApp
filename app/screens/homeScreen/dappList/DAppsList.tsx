@@ -1,12 +1,9 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react'
+import React, { forwardRef, useEffect, useState } from 'react'
 import {
-  Linking,
   SectionList,
   StyleProp,
-  TouchableOpacity,
   View,
-  ViewStyle,
-  Image,
+  ViewStyle
 } from 'react-native'
 import { DAppItem } from 'app/components/DAppItem'
 import { FlatList } from 'react-native-gesture-handler'
@@ -15,12 +12,12 @@ import { useStores } from 'app/models'
 import { Text } from 'app/components/Text'
 import { DAppType } from 'app/resources/type'
 import { useHelper } from 'app/hooks/useHelper'
-import { Icon } from 'app/components/Icon'
-import { colors } from 'app/theme'
 import { useTabsAnimatedHeader } from '../createTabsNavigationtContext'
 import { useTabNavigation } from '../useTabNavigation'
 import { capitalizeFirstLetter, isValidUrl, sorteDAppByCategories } from './utils'
 import sectionListGetItemLayout from 'react-native-section-list-get-item-layout'
+import { FavoriteEmpty } from './FavoriteEmpty'
+import { ExternalSearch } from './ExternalSearch'
 
 interface Props {
   /**
@@ -41,12 +38,12 @@ interface Props {
   contentContainerStyle?: StyleProp<ViewStyle>
 }
 
-const EMPTY_IMAGE = require('assets/images/empty-favorite.png')
 
 export const DAppsList = observer(
   forwardRef(({ searchText, isCategory, contentContainerStyle, isFavorite }: Props, ref: any) => {
     const store = useStores()
     const { getUuid } = useHelper()
+
     const { flatListRef, ...scrollAnimatedConfig } = useTabsAnimatedHeader(ref)
     const { openAppOrBrowser, openApp, openUrl } = useTabNavigation()
 
@@ -135,82 +132,12 @@ export const DAppsList = observer(
 
     return (
       <View style={{ flex: 1 }}>
-        {isSearcByUrl && (
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingVertical: 8,
-              paddingTop: 16,
-              paddingHorizontal: 16,
-            }}
-            onPress={() => {
-              Linking.canOpenURL(searchText).then((result) => {
-                if (result) {
-                  openUrl({
-                    title: searchText,
-                    url: searchText,
-                    id: getUuid(),
-                  })
-                } else {
-                  openUrl({
-                    title: searchText,
-                    url: 'https://www.google.com/search?q=' + searchText.replace('https://', ''),
-                    id: getUuid(),
-                  })
-                }
-              })
-            }}
-          >
-            <Icon icon={'browser'} color={colors.label} />
-            <Text preset="label" text={searchText} style={{ marginHorizontal: 8, flex: 1 }} />
-
-            <Icon icon={'caret-right'} color={colors.label} />
-          </TouchableOpacity>
-        )}
-        {!isSearcByUrl && isSearchByGoogle && !!searchText && (
-          <TouchableOpacity
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              paddingVertical: 8,
-              paddingHorizontal: 16,
-              paddingTop: 16,
-            }}
-            onPress={() => {
-              openUrl({
-                title: searchText,
-                url: 'https://www.google.com/search?q=' + searchText.replace('https://', ''),
-                id: getUuid(),
-              })
-            }}
-          >
-            <Icon icon={'google-chrome-logo'} color={colors.label} />
-            <Text
-              preset="label"
-              text={`Search by google '${searchText}'`}
-              style={{ marginHorizontal: 8, flex: 1 }}
-            />
-            <Icon icon={'caret-right'} color={colors.label} />
-          </TouchableOpacity>
-        )}
-
-        {!searchText && data?.length == 0 && (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
-            <Image source={EMPTY_IMAGE} style={{ width: 180, height: 180 }} resizeMode="center" />
-            <Text
-              preset="label"
-              text="No favorite"
-              style={{ maxWidth: '80%', textAlign: 'center' }}
-            />
-          </View>
-        )}
+        <ExternalSearch
+          searchText={searchText}
+          isSearcByUrl={isSearcByUrl}
+          isSearchByGoogle={isSearchByGoogle}
+        />
+        {!searchText && data?.length == 0 && <FavoriteEmpty />}
         <FlatList
           ref={ref}
           data={data}

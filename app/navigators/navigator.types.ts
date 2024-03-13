@@ -1,5 +1,7 @@
 // import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native'
+import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { DAppType, WebsiteType } from 'app/resources/type'
 
 /**
  * For more information, see this documentation:
@@ -9,9 +11,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
  */
 export type AppStackParamList = {
   home: undefined
-  search: undefined
-  browser: undefined
-  browserTab: undefined
+  detail: {
+    dapp: DAppType
+  }
+  browser: NavigatorScreenParams<BrowserNavigatorParamsList>
 }
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStackScreenProps<
@@ -20,3 +23,15 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 >
 
 // -----------------APP NAVIGATOR---------------------------------
+
+
+export type BrowserNavigatorParamsList = {
+  tabs: undefined
+  website: WebsiteType
+} & Record<string, WebsiteType>
+
+export type BrowserTabsScreenProps<T extends keyof BrowserNavigatorParamsList> =
+  CompositeScreenProps<
+    NativeStackScreenProps<BrowserNavigatorParamsList, T>,
+    AppStackScreenProps<keyof AppStackParamList>
+  >

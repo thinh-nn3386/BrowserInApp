@@ -7,6 +7,7 @@ import { Icon } from 'app/components'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Text } from 'app/components'
 import { bin } from 'react-native-redash'
+import { Ref } from 'react'
 
 interface Props {
   setIsSearching: (val: boolean) => void
@@ -15,7 +16,7 @@ interface Props {
   setSearchText: (val: string) => void
 }
 
-export const UrlInput = ({ searchText, setSearchText, isSearchinh, setIsSearching }: Props) => {
+export const UrlInput = React.forwardRef(({ searchText, setSearchText, isSearchinh, setIsSearching }: Props, ref: Ref<TextInput>) => {
   const { translationY } = useTabsNavigationContext()
 
   const $animHeight = useAnimatedStyle(() => {
@@ -64,6 +65,7 @@ export const UrlInput = ({ searchText, setSearchText, isSearchinh, setIsSearchin
           <Icon icon="magnifying-glass" size={20} color={colors.label} />
 
           <TextInput
+            ref={ref}
             testID="searchBar.textInput"
             value={searchText}
             selectionColor={colors.primary}
@@ -112,4 +114,4 @@ export const UrlInput = ({ searchText, setSearchText, isSearchinh, setIsSearchin
       </Animated.View>
     </Animated.View>
   )
-}
+})

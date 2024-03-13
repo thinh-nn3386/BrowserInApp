@@ -1,9 +1,11 @@
 import React, { forwardRef, useContext, createContext, useMemo, useRef } from 'react'
-import { NativeScrollEvent, NativeSyntheticEvent } from 'react-native'
+import { NativeScrollEvent, NativeSyntheticEvent, Platform } from 'react-native'
 import { SharedValue, clamp, useSharedValue } from 'react-native-reanimated'
 
 export const Header_Max_Height = 52
 export const Header_Min_Height = 0
+
+const IS_ANDROID = Platform.OS === 'android'
 
 export const TabsNavigationContext = createContext(
   null as {
@@ -38,11 +40,12 @@ export function createTabsNavigationComponent<T>(Component: T): T {
 
 export function useTabsAnimatedHeader(flatListRef: React.MutableRefObject<any>) {
   const { translationY } = useTabsNavigationContext()
-  const ref2 = useRef(flatListRef.current || null)
+  const ref2 = useRef(flatListRef?.current || null)
   const prevY = useSharedValue(0)
   const scrollDirection = useSharedValue<'down' | 'up'>('up')
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (!IS_ANDROID) return
     const offsetY = event.nativeEvent.contentOffset.y
     scrollDirection.value = offsetY - prevY.value > 0 ? 'down' : 'up'
     prevY.value = offsetY
@@ -50,6 +53,7 @@ export function useTabsAnimatedHeader(flatListRef: React.MutableRefObject<any>) 
   }
 
   const onScrollEndDrag = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (!IS_ANDROID) return
     if (event.nativeEvent.contentOffset.y > Header_Max_Height) return
 
     if (ref2?.current?.scrollToLocation) {

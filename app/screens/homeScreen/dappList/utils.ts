@@ -24,12 +24,14 @@ export const capitalizeFirstLetter = (string: string) => {
 
 export const isValidUrl = (urlString: string) => {
   let url
-
+  if (!urlString) return false
   try {
     url = new URL(urlString)
   } catch (_) {
     return false
   }
 
-  return url.protocol === 'http:' || url.protocol === 'https:'
+  return true
+
+  // return url?.protocol === 'http:' || url.protocol === 'https:'
 }

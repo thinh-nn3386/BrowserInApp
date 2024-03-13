@@ -10,6 +10,7 @@ import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { AppStackParamList } from './navigator.types'
 import * as Screen from 'app/screens'
+import { BrowserTabsNavigator } from './BrowserTabsNavigator'
 // import { NoInternetConnection } from 'app/components/utils/no-internet/NoInternet'
 
 // Documentation: https://reactnavigation.org/docs/stack-navigator/
@@ -28,8 +29,8 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
         initialRouteName="home"
       >
         <Stack.Screen name="home" component={Screen.HomeScreen} />
-        <Stack.Screen name="browser" component={Screen.BrowserScreen} />
-        <Stack.Screen name="browserTab" component={Screen.BrowserTabsScreen} />
+        <Stack.Screen name="detail" component={Screen.DetailScreen} />
+        <Stack.Screen name="browser" component={BrowserTabsNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   )
