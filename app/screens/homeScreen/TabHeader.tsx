@@ -4,8 +4,10 @@ import { Icon, Text } from 'app/components'
 import Animated, { interpolate, useAnimatedStyle } from 'react-native-reanimated'
 import { colors } from 'app/theme'
 import { Header_Max_Height, useTabsNavigationContext } from './createTabsNavigationtContext'
+import { useTabNavigation } from './useTabNavigation'
 
 interface Props {
+  isShowTabsIcon: boolean
   tabIndex: number
   setTabIndex: (val: number) => void
   onSearch: () => void
@@ -14,6 +16,7 @@ interface Props {
 
 export const TabHeader = (props: Props) => {
   const { translationY } = useTabsNavigationContext()
+  const { openBrowserTabs } = useTabNavigation()
 
   const $searchIconStyle = useAnimatedStyle(() => {
     return {
@@ -27,6 +30,7 @@ export const TabHeader = (props: Props) => {
         height: 50,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         borderBottomWidth: 1,
         borderBottomColor: colors.border,
       }}
@@ -43,21 +47,27 @@ export const TabHeader = (props: Props) => {
         ))}
       </View>
 
-      <Animated.View
-        style={[
-          {
-            position: 'absolute',
-            right: 0,
-          },
-          $searchIconStyle,
-        ]}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
       >
-        <Icon
-          icon="magnifying-glass"
-          containerStyle={{ paddingHorizontal: 16 }}
-          onPress={props.onSearch}
-        />
-      </Animated.View>
+        <Animated.View style={$searchIconStyle}>
+          <Icon
+            icon="magnifying-glass"
+            containerStyle={{ paddingLeft: 16, paddingRight: props.isShowTabsIcon ? 8 : 16 }}
+            onPress={props.onSearch}
+          />
+        </Animated.View>
+        {props.isShowTabsIcon && (
+          <Icon
+            icon="browsers"
+            containerStyle={{ paddingRight: 16, paddingLeft: 8 }}
+            onPress={openBrowserTabs}
+          />
+        )}
+      </View>
     </View>
   )
 }

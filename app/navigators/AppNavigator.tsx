@@ -17,7 +17,7 @@ import { BrowserTabsNavigator } from './BrowserTabsNavigator'
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 export interface NavigationProps
-  extends Partial<React.ComponentProps<typeof NavigationContainer>> { }
+  extends Partial<React.ComponentProps<typeof NavigationContainer>> {}
 
 export const AppNavigator = observer(function AppNavigator(props: NavigationProps) {
   return (

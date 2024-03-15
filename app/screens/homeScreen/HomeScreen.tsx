@@ -10,10 +10,12 @@ import { DAppsList } from './dappList/DAppsList'
 import { observer } from 'mobx-react-lite'
 import Animated, { FadeInDown } from 'react-native-reanimated'
 import { colors } from 'app/theme'
+import { useStores } from 'app/models'
 
 export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationComponent(
   observer((props) => {
     const layout = useWindowDimensions()
+    const store = useStores()
 
     // ----------------------------PARAMS-----------------------------
     const [searchText, setSearchText] = React.useState('')
@@ -32,14 +34,14 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
           viewOffset: 0,
           itemIndex: 0,
           sectionIndex: 0,
-          animated: true,
+          animated: false,
         })
       }
 
       if (flatListRef2?.current?.scrollToOffset) {
         flatListRef2?.current?.scrollToOffset({
           offset: 0,
-          animated: true,
+          animated: false,
         })
       }
 
@@ -47,6 +49,8 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
 
       setIsSearching(true)
     }
+
+    const isShowTabsIcon = store.browserTabs.length > 0
 
     // ----------------------------EFFECT-----------------------------
 
@@ -59,33 +63,46 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
           setIsSearching={setIsSearching}
           setSearchText={setSearchText}
         />
-
-
-        <TabHeader routes={routes} tabIndex={index} setTabIndex={setIndex} onSearch={onSearch} />
+        <TabHeader
+          isShowTabsIcon={isShowTabsIcon}
+          routes={routes}
+          tabIndex={index}
+          setTabIndex={setIndex}
+          onSearch={onSearch}
+        />
         <TabView
           navigationState={{ index, routes }}
+          swipeEnabled={false}
           renderScene={({ route }) => {
             switch (route.key) {
               case 'Explore':
                 return <DAppsList ref={flatListRef1} isCategory />
               case 'Favorites':
-                return <DAppsList ref={flatListRef2} isFavorite />
+                return (
+                  <DAppsList
+                    ref={flatListRef2}
+                    isFavorite
+                    contentContainerStyle={{ paddingTop: 16 }}
+                  />
+                )
               default:
                 return null
             }
           }}
           onIndexChange={setIndex}
           renderTabBar={() => null}
-          lazy
           initialLayout={{ width: layout.width }}
         />
         {isSearchinh && (
-          <Animated.View entering={FadeInDown} style={{
-            ...StyleSheet.absoluteFillObject,
-            top: 56,
-            backgroundColor: colors.background2
-          }}>
-            <DAppsList searchText={searchText} />
+          <Animated.View
+            entering={FadeInDown}
+            style={{
+              ...StyleSheet.absoluteFillObject,
+              top: 56,
+              backgroundColor: colors.background2,
+            }}
+          >
+            <DAppsList searchText={searchText} disableAnimated />
           </Animated.View>
         )}
       </Screen>

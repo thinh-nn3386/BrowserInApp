@@ -12,33 +12,31 @@ export const useTabNavigation = () => {
     navigation.navigate('detail', { dapp })
   }
 
-  const openAppOrBrowser =
-    (item: DAppType) => {
-      const tabData: WebsiteType = {
-        title: item.name,
-        url: item.website,
-        id: getUuid(),
-        dapp: item,
-      }
-      // create new tab
-      store.addBrowserTabs(tabData)
-      store.addRecentAccessDapps(item)
-      navigation.navigate(
-        'browser',
-        { screen: 'website' + tabData.id, params: tabData },
-      )
+  const openAppOrBrowser = (item: DAppType) => {
+    const tabData: WebsiteType = {
+      title: item.name,
+      url: item.website,
+      id: getUuid(),
+      dapp: item,
     }
+    // create new tab
+    store.addBrowserTabs(tabData)
+    store.addRecentAccessDapps(item)
+    navigation.navigate('browser', { screen: 'website' + tabData.id, params: tabData })
+  }
 
   const openUrl = (tab: WebsiteType) => {
-    navigation.navigate(
-      'browser',
-      { screen: 'website' + tab.id, params: tab },
-    )
+    navigation.navigate('browser', { screen: 'website' + tab.id, params: tab })
+  }
+
+  const openBrowserTabs = () => {
+    navigation.navigate('browser', { screen: 'tabs' })
   }
 
   return {
     openAppOrBrowser,
     openApp,
     openUrl,
+    openBrowserTabs,
   }
 }

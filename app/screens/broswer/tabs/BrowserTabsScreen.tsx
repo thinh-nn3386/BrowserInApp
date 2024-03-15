@@ -23,6 +23,11 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
     store.removeBrowserTabs(id)
   }
 
+  const onCloseAllTabs = () => {
+    store.removeAllBrowserTabs()
+    navigateToHome()
+  }
+
   const navigateToHome = () => {
     navigation.navigate('home')
   }
@@ -31,16 +36,20 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
     <Screen
       useSafe
       header={
-        <View style={{
-          paddingHorizontal: 16,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between"
-        }}>
+        <View
+          style={{
+            height: 56,
+            paddingHorizontal: 16,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
           <Icon icon="x" onPress={navigateToHome} />
-          <Text preset='bold' text={"Tabs"} />
+          <Text preset="bold" text={'Tabs'} />
           <View style={{ width: 24 }} />
-        </View>}
+        </View>
+      }
       footer={
         <View
           style={{
@@ -62,7 +71,7 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
               justifyContent: 'center',
             }}
           >
-            <TouchableOpacity onPress={navigateToHome} >
+            <TouchableOpacity onPress={navigateToHome}>
               <Icon
                 icon="plus"
                 size={28}
@@ -79,17 +88,8 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
               />
             </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              store.removeAllBrowserTabs()
-              navigateToHome()
-            }}
-          >
-            <Text
-              preset="bold"
-              text="Close All"
-              style={{ textAlign: 'center', flexGrow: 0 }}
-            />
+          <TouchableOpacity onPress={onCloseAllTabs}>
+            <Text preset="bold" text="Close All" style={{ textAlign: 'center', flexGrow: 0 }} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -102,6 +102,7 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
       }
       contentContainerStyle={{
         backgroundColor: colors.background2,
+        flex: 1,
       }}
     >
       <FlatList
@@ -109,6 +110,8 @@ export const BrowserTabsScreen: FC<BrowserTabsScreenProps<'tabs'>> = observer((p
         keyExtractor={(item) => item.id}
         contentContainerStyle={{
           padding: 20,
+          flex: 1,
+          backgroundColor: colors.background,
         }}
         numColumns={2}
         ItemSeparatorComponent={() => <View style={{ height: 12 }} />}

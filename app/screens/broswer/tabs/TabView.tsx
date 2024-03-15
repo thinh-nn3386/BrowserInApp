@@ -25,6 +25,8 @@ export const TabView = ({ title, localImage, lastUpdate, index, onPress, onClose
         height: ITEM_WIDTH + 40,
         borderRadius: 12,
         marginLeft: index % NUMBER_OF_COLUMN !== 0 ? SPACE : 0,
+        borderWidth: 1,
+        borderColor: colors.border,
         overflow: 'hidden',
       }}
     >
@@ -32,7 +34,7 @@ export const TabView = ({ title, localImage, lastUpdate, index, onPress, onClose
         style={{
           height: 40,
           padding: 4,
-          backgroundColor: colors.background,
+          backgroundColor: colors.background2,
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -50,7 +52,6 @@ export const TabView = ({ title, localImage, lastUpdate, index, onPress, onClose
         />
         <Icon
           icon="x"
-          color={colors.label}
           size={18}
           containerStyle={{
             padding: 4,
@@ -69,7 +70,7 @@ export const TabView = ({ title, localImage, lastUpdate, index, onPress, onClose
           {!!localImage && (
             <Image
               key={lastUpdate}
-              source={{ uri: "file://" + localImage }}
+              source={{ uri: 'file://' + localImage }}
               style={{ flex: 1, maxWidth: ITEM_WIDTH }}
               resizeMode="cover"
             />

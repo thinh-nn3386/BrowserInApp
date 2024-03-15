@@ -1,4 +1,4 @@
-import { Instance, SnapshotOut, types, cast, IStateTreeNode, SnapshotIn } from 'mobx-state-tree'
+import { Instance, SnapshotOut, types, IStateTreeNode, SnapshotIn } from 'mobx-state-tree'
 import RNFS from 'react-native-fs'
 import { dappsList } from 'app/resources/data'
 import { DAppType, WebsiteType } from 'app/resources/type'
@@ -17,7 +17,7 @@ export const RootStoreModel = types
     dapps: types.optional(types.array(types.frozen<DAppType>()), dappsList),
     favoriteDApps: types.optional(types.array(types.frozen<DAppType>()), []),
     browserTabs: types.optional(types.array(types.frozen<WebsiteType>()), []),
-    recentAccesshDapps: types.optional(types.array(types.frozen<DAppType>()), []),
+    recentAccessDapps: types.optional(types.array(types.frozen<DAppType>()), []),
   })
   .actions(withSetPropAction)
   .views((self) => ({
@@ -41,17 +41,17 @@ export const RootStoreModel = types
     },
 
     addRecentAccessDapps: (dapp: DAppType) => {
-      if (self.recentAccesshDapps.some((app) => app.dappId === dapp.dappId)) {
-        self.setProp('recentAccesshDapps', [
-          ...self.recentAccesshDapps.sort((app) => (app.dappId !== dapp.dappId ? -1 : 1)),
+      if (self.recentAccessDapps.some((app) => app.dappId === dapp.dappId)) {
+        self.setProp('recentAccessDapps', [
+          ...self.recentAccessDapps.sort((app) => (app.dappId !== dapp.dappId ? -1 : 1)),
         ])
       } else {
-        self.setProp('recentAccesshDapps', [dapp, ...self.recentAccesshDapps])
+        self.setProp('recentAccessDapps', [dapp, ...self.recentAccessDapps])
       }
     },
 
     clearRecentAccessDapps: () => {
-      self.setProp('recentAccesshDapps', [])
+      self.setProp('recentAccessDapps', [])
     },
     //------------------------------TABS------------------------------
     /**
@@ -72,6 +72,12 @@ export const RootStoreModel = types
     },
 
     removeAllBrowserTabs: () => {
+      const tabsImage = [...self.browserTabs].map((tab) => tab.localImage)
+      try {
+        tabsImage.forEach((imageUrl) => RNFS.unlink(imageUrl))
+      } catch {
+        console.error('Tabs local image does not ecist')
+      }
       self.setProp('browserTabs', [])
     },
 
@@ -87,14 +93,14 @@ export const RootStoreModel = types
   .actions((self) => ({
     isFavoriteDApp: (dapp: DAppType) => {
       return self.favoriteDApps.some((e) => e.website === dapp.website)
-    }
+    },
   }))
 
 /**
  * The RootStore instance.
  */
-export interface RootStore extends Instance<typeof RootStoreModel> { }
+export interface RootStore extends Instance<typeof RootStoreModel> {}
 /**
  * The data of a RootStore.
  */
-export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> { }
+export interface RootStoreSnapshot extends SnapshotOut<typeof RootStoreModel> {}

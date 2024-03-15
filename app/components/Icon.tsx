@@ -112,6 +112,7 @@ export const iconRegistry = {
   'house-line': require('assets/icons/house-line.png'),
   'arrow-left': require('assets/icons/arrow-left.png'),
   browser: require('assets/icons/browser.png'),
+  browsers: require('assets/icons/browsers.png'),
   'x-bold': require('assets/icons/x-bold.png'),
   'google-chrome-logo': require('assets/icons/google-chrome-logo.png'),
 }

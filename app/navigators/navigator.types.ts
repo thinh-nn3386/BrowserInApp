@@ -24,7 +24,6 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 
 // -----------------APP NAVIGATOR---------------------------------
 
-
 export type BrowserNavigatorParamsList = {
   tabs: undefined
   website: WebsiteType
