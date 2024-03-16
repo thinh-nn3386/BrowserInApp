@@ -7,6 +7,7 @@ import { Header_Max_Height, useTabsNavigationContext } from './createTabsNavigat
 import { useTabNavigation } from './useTabNavigation'
 
 interface Props {
+  isSearching: boolean
   isShowTabsIcon: boolean
   tabIndex: number
   setTabIndex: (val: number) => void
@@ -27,6 +28,7 @@ export const TabHeader = (props: Props) => {
   return (
     <View
       style={{
+        opacity: props.isSearching ? 0 : 1,
         height: 50,
         flexDirection: 'row',
         alignItems: 'center',

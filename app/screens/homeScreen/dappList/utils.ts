@@ -27,11 +27,8 @@ export const isValidUrl = (urlString: string) => {
   if (!urlString) return false
   try {
     url = new URL(urlString)
+    return url?.protocol === 'http:' || url.protocol === 'https:'
   } catch (_) {
     return false
   }
-
-  return true
-
-  // return url?.protocol === 'http:' || url.protocol === 'https:'
 }

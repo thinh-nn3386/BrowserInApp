@@ -26,6 +26,8 @@ export const useTabNavigation = () => {
   }
 
   const openUrl = (tab: WebsiteType) => {
+    // create new tab
+    store.addBrowserTabs(tab)
     navigation.navigate('browser', { screen: 'website' + tab.id, params: tab })
   }
 

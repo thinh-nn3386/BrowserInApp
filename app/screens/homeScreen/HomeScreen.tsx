@@ -1,52 +1,56 @@
-import React, { FC, useRef, useState } from 'react'
+import React, { FC, useCallback, useRef, useState } from 'react'
 import { Screen } from 'app/components'
 import { FlatList, SectionList, TextInput, StyleSheet, useWindowDimensions } from 'react-native'
-import { TabView } from 'react-native-tab-view'
+import { SceneMap, TabView } from 'react-native-tab-view'
 import { TabHeader } from './TabHeader'
 import { UrlInput } from './UrlInput'
-import { createTabsNavigationComponent } from './createTabsNavigationtContext'
+import { createTabsNavigationComponent, useTabsNavigationContext } from './createTabsNavigationtContext'
 import { AppStackScreenProps } from 'app/navigators/navigator.types'
 import { DAppsList } from './dappList/DAppsList'
 import { observer } from 'mobx-react-lite'
-import Animated, { FadeInDown } from 'react-native-reanimated'
+import Animated, { FadeInDown, withSpring } from 'react-native-reanimated'
 import { colors } from 'app/theme'
 import { useStores } from 'app/models'
+
+
+const Explore = () => (
+  <DAppsList isCategory />
+);
+
+const Favorites = () => (
+  <DAppsList
+    isFavorite
+    contentContainerStyle={{ paddingTop: 16 }}
+  />
+);
+
+const renderScene = SceneMap({
+  Explore: Explore,
+  Favorites: Favorites,
+});
 
 export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationComponent(
   observer((props) => {
     const layout = useWindowDimensions()
+    const { translationY } = useTabsNavigationContext()
     const store = useStores()
 
     // ----------------------------PARAMS-----------------------------
     const [searchText, setSearchText] = React.useState('')
-    const [isSearchinh, setIsSearching] = useState(false)
+    const [isSearching, setIsSearching] = useState(false)
 
     const [index, setIndex] = React.useState(0)
     const [routes] = React.useState([{ key: 'Explore' }, { key: 'Favorites' }])
 
-    const flatListRef1 = useRef<SectionList>(null)
-    const flatListRef2 = useRef<FlatList>(null)
     const textInputRef = useRef<TextInput>(null)
 
     const onSearch = () => {
-      if (flatListRef1?.current?.scrollToLocation) {
-        flatListRef1?.current?.scrollToLocation({
-          viewOffset: 0,
-          itemIndex: 0,
-          sectionIndex: 0,
-          animated: false,
-        })
-      }
-
-      if (flatListRef2?.current?.scrollToOffset) {
-        flatListRef2?.current?.scrollToOffset({
-          offset: 0,
-          animated: false,
-        })
-      }
-
       textInputRef.current.focus()
-
+      translationY.value = withSpring(0, {
+        mass: 1,
+        stiffness: 100,
+        damping: 200,
+      })
       setIsSearching(true)
     }
 
@@ -58,12 +62,13 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
       <Screen useSafe contentContainerStyle={{ flex: 1 }}>
         <UrlInput
           ref={textInputRef}
-          isSearchinh={isSearchinh}
+          isSearching={isSearching}
           searchText={searchText}
           setIsSearching={setIsSearching}
           setSearchText={setSearchText}
         />
         <TabHeader
+          isSearching={isSearching}
           isShowTabsIcon={isShowTabsIcon}
           routes={routes}
           tabIndex={index}
@@ -73,27 +78,12 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
         <TabView
           navigationState={{ index, routes }}
           swipeEnabled={false}
-          renderScene={({ route }) => {
-            switch (route.key) {
-              case 'Explore':
-                return <DAppsList ref={flatListRef1} isCategory />
-              case 'Favorites':
-                return (
-                  <DAppsList
-                    ref={flatListRef2}
-                    isFavorite
-                    contentContainerStyle={{ paddingTop: 16 }}
-                  />
-                )
-              default:
-                return null
-            }
-          }}
+          renderScene={renderScene}
           onIndexChange={setIndex}
           renderTabBar={() => null}
           initialLayout={{ width: layout.width }}
         />
-        {isSearchinh && (
+        {isSearching && (
           <Animated.View
             entering={FadeInDown}
             style={{

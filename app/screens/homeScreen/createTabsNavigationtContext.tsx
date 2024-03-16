@@ -39,11 +39,10 @@ export function createTabsNavigationComponent<T>(Component: T): T {
 }
 
 export function useTabsAnimatedHeader(
-  flatListRef: React.MutableRefObject<any>,
   disableAnimated?: boolean
 ) {
   const { translationY } = useTabsNavigationContext()
-  const ref2 = useRef(flatListRef?.current || null)
+  const ref2 = useRef(null)
   const prevY = useSharedValue(0)
   const scrollDirection = useSharedValue<'down' | 'up'>('up')
 

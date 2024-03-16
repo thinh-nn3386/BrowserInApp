@@ -11,13 +11,13 @@ import { Ref } from 'react'
 
 interface Props {
   setIsSearching: (val: boolean) => void
-  isSearchinh: boolean
+  isSearching: boolean
   searchText: string
   setSearchText: (val: string) => void
 }
 
 export const UrlInput = React.forwardRef(
-  ({ searchText, setSearchText, isSearchinh, setIsSearching }: Props, ref: Ref<TextInput>) => {
+  ({ searchText, setSearchText, isSearching, setIsSearching }: Props, ref: Ref<TextInput>) => {
     const { translationY } = useTabsNavigationContext()
 
     const $animHeight = useAnimatedStyle(() => {
@@ -38,7 +38,7 @@ export const UrlInput = React.forwardRef(
     })
 
     const animSearch = useDerivedValue(() => {
-      return withTiming(bin(isSearchinh))
+      return withTiming(bin(isSearching))
     })
 
     const $animSearch = useAnimatedStyle(() => {

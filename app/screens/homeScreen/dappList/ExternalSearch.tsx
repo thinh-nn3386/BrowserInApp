@@ -29,6 +29,7 @@ export const ExternalSearch = ({ isSearcByUrl, searchText, isSearchByGoogle }: P
           }}
           onPress={() => {
             Linking.canOpenURL(searchText).then((result) => {
+              console.log(result, searchText)
               if (result) {
                 openUrl({
                   title: searchText,
