@@ -45,6 +45,7 @@ export const DAppItem = ({ dapp, openApp, openUrl, isFavorite, isShowFlag }: Pro
         >
           <Text
             text={dapp.name}
+            numberOfLines={1}
             style={{
               lineHeight: 22,
             }}

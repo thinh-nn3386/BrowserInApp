@@ -7,7 +7,7 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "postinstall": "rimraf -rf node_modules/react-native-tcp/ios/CocoaAsyncSocket && rimraf -rf node_modules/react-native-udp/ios/CocoaAsyncSocket && node ./bin/postInstall  ",
+    "postinstall": "node ./bin/postInstall",
     "test": "jest"
   },
   "dependencies": {

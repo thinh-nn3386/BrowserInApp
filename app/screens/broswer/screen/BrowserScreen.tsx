@@ -192,6 +192,7 @@ export const BrowserScreen: FC<BrowserTabsScreenProps<'website'>> = observer((pr
             borderTopRightRadius: 12,
           }}
           mediaPlaybackRequiresUserAction={true}
+          allowsInlineMediaPlayback
           sharedCookiesEnabled={true}
           allowsBackForwardNavigationGestures
           onNavigationStateChange={handleWebViewNavigationStateChange}

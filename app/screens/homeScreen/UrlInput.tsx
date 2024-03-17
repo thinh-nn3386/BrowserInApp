@@ -2,7 +2,7 @@ import * as React from 'react'
 import Animated, { useAnimatedStyle, useDerivedValue, withTiming } from 'react-native-reanimated'
 import { Header_Max_Height, useTabsNavigationContext } from './createTabsNavigationtContext'
 import { colors } from 'app/theme'
-import { View, TextInput, Keyboard } from 'react-native'
+import { View, TextInput } from 'react-native'
 import { Icon } from 'app/components'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { Text } from 'app/components'
@@ -10,19 +10,20 @@ import { bin } from 'react-native-redash'
 import { Ref } from 'react'
 
 interface Props {
-  setIsSearching: (val: boolean) => void
+  cancelSearch: () => void
+  onSearch: () => void
   isSearching: boolean
   searchText: string
   setSearchText: (val: string) => void
 }
 
 export const UrlInput = React.forwardRef(
-  ({ searchText, setSearchText, isSearching, setIsSearching }: Props, ref: Ref<TextInput>) => {
+  ({ searchText, setSearchText, isSearching, cancelSearch, onSearch }: Props, ref: Ref<TextInput>) => {
     const { translationY } = useTabsNavigationContext()
 
     const $animHeight = useAnimatedStyle(() => {
       return {
-        height: 52 - translationY.value,
+        height: Header_Max_Height - translationY.value,
       }
     })
 
@@ -72,9 +73,7 @@ export const UrlInput = React.forwardRef(
               selectionColor={colors.primary}
               placeholder={'Tìm kiếm DApp hoặc Nhập UR'}
               placeholderTextColor={colors.label}
-              onFocus={() => {
-                setIsSearching(true)
-              }}
+              onFocus={onSearch}
               onChangeText={setSearchText}
               style={{
                 flex: 1,
@@ -100,10 +99,7 @@ export const UrlInput = React.forwardRef(
 
           <Animated.View style={$animSearch}>
             <TouchableOpacity
-              onPress={() => {
-                Keyboard.dismiss()
-                setIsSearching(false)
-              }}
+              onPress={cancelSearch}
               style={{
                 width: 80,
                 paddingLeft: 16,

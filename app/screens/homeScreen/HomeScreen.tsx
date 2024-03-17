@@ -1,6 +1,6 @@
-import React, { FC, useCallback, useRef, useState } from 'react'
+import React, { FC, useRef, useState } from 'react'
 import { Screen } from 'app/components'
-import { FlatList, SectionList, TextInput, StyleSheet, useWindowDimensions } from 'react-native'
+import { TextInput, StyleSheet, useWindowDimensions } from 'react-native'
 import { SceneMap, TabView } from 'react-native-tab-view'
 import { TabHeader } from './TabHeader'
 import { UrlInput } from './UrlInput'
@@ -8,7 +8,7 @@ import { createTabsNavigationComponent, useTabsNavigationContext } from './creat
 import { AppStackScreenProps } from 'app/navigators/navigator.types'
 import { DAppsList } from './dappList/DAppsList'
 import { observer } from 'mobx-react-lite'
-import Animated, { FadeInDown, withSpring } from 'react-native-reanimated'
+import Animated, { FadeInDown } from 'react-native-reanimated'
 import { colors } from 'app/theme'
 import { useStores } from 'app/models'
 
@@ -32,7 +32,7 @@ const renderScene = SceneMap({
 export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationComponent(
   observer((props) => {
     const layout = useWindowDimensions()
-    const { translationY } = useTabsNavigationContext()
+    const { isSearch } = useTabsNavigationContext()
     const store = useStores()
 
     // ----------------------------PARAMS-----------------------------
@@ -46,12 +46,14 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
 
     const onSearch = () => {
       textInputRef.current.focus()
-      translationY.value = withSpring(0, {
-        mass: 1,
-        stiffness: 100,
-        damping: 200,
-      })
+      isSearch.value = true
       setIsSearching(true)
+    }
+
+    const cancelSearch = () => {
+      textInputRef.current.blur()
+      isSearch.value = false
+      setIsSearching(false)
     }
 
     const isShowTabsIcon = store.browserTabs.length > 0
@@ -64,7 +66,8 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
           ref={textInputRef}
           isSearching={isSearching}
           searchText={searchText}
-          setIsSearching={setIsSearching}
+          onSearch={onSearch}
+          cancelSearch={cancelSearch}
           setSearchText={setSearchText}
         />
         <TabHeader
@@ -88,11 +91,11 @@ export const HomeScreen: FC<AppStackScreenProps<'home'>> = createTabsNavigationC
             entering={FadeInDown}
             style={{
               ...StyleSheet.absoluteFillObject,
-              top: 56,
+              top: 48,
               backgroundColor: colors.background2,
             }}
           >
-            <DAppsList searchText={searchText} disableAnimated />
+            <DAppsList searchText={searchText} disableAnimated isShowFlag />
           </Animated.View>
         )}
       </Screen>
